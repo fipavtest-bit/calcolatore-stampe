@@ -1,42 +1,93 @@
 <!DOCTYPE html>
-<html>
+<html lang="it">
 <head>
-  <meta charset="UTF-8">
-  <title>Calcolatore Stampe</title>
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  
-  <link rel="manifest" href="manifest.json">
-  <meta name="theme-color" content="#0f172a">
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Print Calculator</title>
 
-  <style>
-    body {
-      margin:0;
-      display:flex;
-      justify-content:center;
-      align-items:center;
-      height:100vh;
-      background:#0f172a;
-      color:white;
-      font-family:sans-serif;
-      text-align:center;
-    }
-  </style>
+<link rel="manifest" href="manifest.json">
+<meta name="theme-color" content="#0f172a">
+<link rel="apple-touch-icon" href="icon-192.png">
+
+<style>
+body{
+  font-family:Arial, sans-serif;
+  background:#0f172a;
+  color:white;
+  margin:0;
+  padding:20px;
+}
+.container{
+  max-width:500px;
+  margin:auto;
+  background:#1e293b;
+  padding:20px;
+  border-radius:16px;
+}
+input, select{
+  width:100%;
+  padding:10px;
+  margin:10px 0;
+  border-radius:8px;
+  border:none;
+}
+button{
+  width:100%;
+  padding:12px;
+  background:#2563eb;
+  color:white;
+  border:none;
+  border-radius:10px;
+  font-size:16px;
+}
+.result{
+  margin-top:15px;
+  font-size:18px;
+  font-weight:bold;
+}
+</style>
 </head>
+
 <body>
 
-<div>
-  <h2>Caricamento...</h2>
+<div class="container">
+<h2>Print Calculator</h2>
+
+<label>Larghezza (cm)</label>
+<input type="number" id="width">
+
+<label>Altezza (cm)</label>
+<input type="number" id="height">
+
+<label>Prezzo al mq (€)</label>
+<input type="number" id="price">
+
+<button onclick="calculate()">Calcola</button>
+
+<div class="result" id="result"></div>
 </div>
 
 <script>
-  if ('serviceWorker' in navigator) {
-    navigator.serviceWorker.register('service-worker.js');
+function calculate(){
+  let w = document.getElementById("width").value;
+  let h = document.getElementById("height").value;
+  let p = document.getElementById("price").value;
+
+  if(!w || !h || !p){
+    document.getElementById("result").innerText="Inserisci tutti i campi";
+    return;
   }
 
-  // Redirect automatico dopo 1 secondo
-  setTimeout(function() {
-    window.location.href = "https://tenthbanners.my.canva.site/print-calculator";
-  }, 1000);
+  let mq = (w/100) * (h/100);
+  let total = mq * p;
+
+  document.getElementById("result").innerText =
+    "Totale: € " + total.toFixed(2);
+}
+
+if ('serviceWorker' in navigator) {
+  navigator.serviceWorker.register('service-worker.js');
+}
 </script>
 
 </body>
