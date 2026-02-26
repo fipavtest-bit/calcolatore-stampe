@@ -1,10 +1,10 @@
 {
-  "name": "Calcolatore Stampe",
-  "short_name": "Stampe",
-  "start_url": "/",
+  "name": "Print Calculator",
+  "short_name": "PrintCalc",
+  "start_url": ".",
   "display": "standalone",
-  "background_color": "#000000",
-  "theme_color": "#000000",
+  "background_color": "#0f172a",
+  "theme_color": "#0f172a",
   "icons": [
     {
       "src": "icon-192.png",
